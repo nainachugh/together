@@ -36,6 +36,7 @@ EMAIL_USE_TLS = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'registration',
     'django.contrib.auth',
     'django.contrib.sites',
     'django.contrib.contenttypes',
@@ -43,12 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'registration',
     'users',
-    'project',
+    'projects',
     'message',
     'discussion',
     'django_messages',
+    'schedule',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -76,6 +77,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django_messages.context_processors.inbox',
+                'django.core.context_processors.request',
             ],
         },
     },
@@ -94,6 +96,7 @@ DATABASES = {
     }
 }
 
+# AUTH_PROFILE_MODULE = 'users.UserProfile'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -119,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Bangkok'
 
 USE_I18N = True
 

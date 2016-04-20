@@ -1,12 +1,15 @@
-$(document).ready(function () {
-    $('.nav li a').click(function(e) {
+var selector, elems, makeActive;
 
-        $('.nav li').removeClass('active');
+selector = '.nav li';
 
-        var $parent = $(this).parent();
-        if (!$parent.hasClass('active')) {
-            $parent.addClass('active');
-        }
-        e.preventDefault();
-    });
-});
+elems = document.querySelectorAll(selector);
+
+makeActive = function () {
+    for (var i = 0; i < elems.length; i++)
+        elems[i].classList.remove('active');
+    
+    this.classList.add('active');
+};
+
+for (var i = 0; i < elems.length; i++)
+    elems[i].addEventListener('click', makeActive);

@@ -1,32 +1,25 @@
 from django.conf import settings
 from django.core.mail import send_mail
-from django.shortcuts import render
-from .forms import SignUpForm, ContactForm
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import SignUpForm, ContactForm, UserProfileForm
 from django.http import HttpResponseRedirect
+from .models import UserProfile
+from projects.models import Project, Task
 
 
 # Create your views here.
 def home(request):
 	title = "Welcome"
-	if request.method == 'POST':
-		print request.POST
-	form = SignUpForm(request.POST or None)
-	context = {
-		"title": title,
-		"form": form,
-	}
-	if form.is_valid():
-		#form.save()
-		instance = form.save(commit=False)
-		# full_name = form.cleaned_data.get('full_name')
-		# if not
-		instance.save()
-		context = {
-			"title": "Thanks!"
-		}
 	if request.user.is_authenticated():
-		return render(request, "myprofile.html", '')
-	return render(request, "home.html", context)
+		try:
+			profile = UserProfile.objects.get(username=request.user)
+			return render(request, "myprofile.html", {'profile':profile})
+		except ObjectDoesNotExist:
+			print "nothing"
+			# form = UserProfileForm()
+			# return render(request, "editprofile.html",{'form':form})
+	return render(request, "home.html", '')
 
 
 def about(request):
@@ -36,21 +29,31 @@ def about(request):
 	return render(request, "about.html", context)
 
 def myprofile(request):
+	try:
+		profile = UserProfile.objects.get(username=request.user)
+		projects = Project.objects.all()
+		return render(request, "myprofile.html", {'profile': profile, 'projects': projects})
+	except ObjectDoesNotExist:
+		print "nothing"
+
 	return render(request, "myprofile.html", '')
 
 def editprofile(request):
-	args = {}
-
-	# if request.method == 'POST':
-	#     form = EditProfile(request.POST, instance=request.user)
-	#     if form.is_valid():
-	#         form.save()
-	#         return HttpResponseRedirect('/profile/')
-	# else:
-	#     form = EditProfile()
-
-	# args['form'] = form
-	return render(request, "editprofile.html", args)
+	if request.method == "POST":
+		form = UserProfileForm(request.POST)
+		if form.is_valid():
+			user = form.save(commit=False)
+			user.username = request.user
+			user.save()
+			return redirect('home')
+	else:
+		form = UserProfileForm()
+		try:
+			profile = UserProfile.objects.get(username=request.user)
+			return render(request,'editprofile.html',{ 'form': form, 'profile': profile})
+		except ObjectDoesNotExist:
+			print "nothing"
+	return render(request,'editprofile.html',{ 'form': form})
 
 
 	

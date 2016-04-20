@@ -26,7 +26,14 @@
         form{
           font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; 
         }
+        .panel-group{
+          font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 
+        }
+        .panel-heading h3{
+          font-weight:bold;
+
+        }
         .brand h1{
           font-family: 'Pacifico', cursive;
           color:#EB6767;
@@ -70,6 +77,17 @@
           font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
           background-color:#4F4545;
           color:white;
+          padding:auto;
+          margin:auto;
+        }
+        .btn-clean{
+          font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+          background-color:white;
+          color:black;
+          padding:auto;
+          margin:1px;
+          border:1px;
+          border: 1px solid #0099cc;        
         }
         .btn-block{
           font-size:12px;
@@ -84,12 +102,16 @@
         .dropdown-menu{
           width:300px !important;
         }
+        .comment{
+          font-family:'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif; 
 
+        }
+ 
+
+     
       {% endblock %}
       </style>
-
   </head>
-
 
   <body>
   {% include 'navbar.html' %}
@@ -97,23 +119,26 @@
       {% block jumbotron %}
      
       {% endblock %}
-    </div>
-          <div class="container">
-              {% block topbar %}
+  </div>
 
-          {% endblock %}
-</div>
-     
-      <div class="container">
+  <div class="container">
+        {% block topbar %}
 
-          {% block content %}
+          {% include 'topbar.html' %}
 
-          {% endblock %}
-      
+        {% endblock %}
+  </div>
+   
+    <div class="container">
 
-      </div> 
+        {% block content %}
 
-      {% include 'javascript.html' %}
+        {% endblock %}
+    
+
+    </div> 
+
+    {% include 'javascript.html' %}
       
   </body>
 </html>

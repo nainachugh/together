@@ -1,11 +1,14 @@
-<div id="topbar">
-	<ul class="nav nav-tabs">
-			<li><a href="{% url 'profile' %}">Home</a></li>
-			<!-- <li><a href="{% url 'editprofile' %}">Profile</a></li> -->
-			<li><a href="{% url 'projects' %}">Projects</a></li>
-			<li><a href="{% url 'schedule' %}">Schedule</a></li>
-			<li><a href="{% url 'messages_inbox' %}">Messages</a></li>
-			<li><a href="{% url 'post_filter' pk=1%}">Discussions</a></li>
 
-	</ul>
-</div>
+  <nav class="cd-stretchy-nav">
+    <a class="cd-nav-trigger" href="">
+			<span aria-hidden="true"></span>
+		</a>
+    <ul>
+      <li><a href="{% url 'profile' %}"><span>Home</span></a></li>
+      <li><a href="{% url 'projects' %}"><span>Projects</span></a></li>
+      <li><a href="{% url 'schedule' %}"><span>Schedule</span></a></li>
+      <li><a href="{% url 'messages_inbox' %}"><span>Messages</span></a></li>
+      <li><a href="{% url 'post_list' %}"><span>Discussions</span></a></li>
+    </ul>
+    <span aria-hidden="true" class="stretchy-nav-bg"></span>
+  </nav>

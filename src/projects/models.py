@@ -7,7 +7,7 @@ from decimal import Decimal
 
 # Create your models here.
 class Project(models.Model):
-	projectName = models.CharField(max_length=200, unique=True)
+	projectName = models.CharField(max_length=200, unique=True,default='Untitled Project')
 	members = models.ManyToManyField(User)
 	projectProgress = models.DecimalField(default=Decimal('0.00'),max_digits=5,decimal_places=2)
 	dueDate = models.DateField(default=timezone.now,blank=True)
@@ -42,7 +42,7 @@ class Task(models.Model):
 
 	taskState = models.CharField(choices=STATE, default=AWAITING, max_length=200)
 	
-	difficultyLevel =models.CharField(choices=DIFFICULTY_STATE, default=EASY, max_length=200)
+	difficultyLevel =models.IntegerField(choices=DIFFICULTY_STATE, default=EASY, max_length=200)
 	expectedDate = models.DateField(default=timezone.now,blank=True)
 	actualDate = models.DateField(default=timezone.now,blank=True)
 	description = models.CharField(blank = True, max_length = 200)
